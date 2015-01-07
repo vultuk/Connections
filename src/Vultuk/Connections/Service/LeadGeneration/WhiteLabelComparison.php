@@ -4,6 +4,7 @@ namespace Vultuk\Connections\Service\LeadGeneration;
 
 use Vultuk\Connections\Connector\CurlPost;
 use Vultuk\Connections\Contracts\Service;
+use Vultuk\Connections\Result;
 use Vultuk\Connections\Service\Service as isAService;
 
 class WhiteLabelComparison implements Service
@@ -38,12 +39,18 @@ class WhiteLabelComparison implements Service
      * Parses the return data to return it as an array
      *
      * @param $data
-     * @return mixed
+     * @return \Vultuk\Connections\Result
      * @author Simon Skinner <s.skinner@clix.co.uk>
      */
     public function parse($data)
     {
-        return json_decode($data, true);
+        $results = json_decode($data, true);
+
+        return $this->createResult(
+            ($results['success'])  ? true : false,
+            ($results['success'])  ? $results['data']['data'] : null,
+            (!$results['success']) ? $results['errormsg'] : null
+        );
     }
 
 }

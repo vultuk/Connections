@@ -1,5 +1,7 @@
 <?php namespace Vultuk\Connections\Service;
 
+use Vultuk\Connections\Result;
+
 trait Service
 {
     protected $connector;
@@ -45,4 +47,15 @@ trait Service
         $this->data = $data;
         return $this;
     }
+
+
+    protected function createResult($result, $data, $error)
+    {
+        $returnResult = new Result();
+        $returnResult->setResult($result);
+        $returnResult->setData($data);
+        $returnResult->setErrorMessage($error);
+        return $returnResult;
+    }
+
 } 
