@@ -18,7 +18,6 @@ class PostTestServerComSpec extends ObjectBehavior
     {
         $this->setData(['test' => 'data']);
         $this->send()->shouldBeString();
-
     }
 
 }
