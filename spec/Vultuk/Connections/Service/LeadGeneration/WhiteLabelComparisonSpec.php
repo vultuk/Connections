@@ -15,7 +15,7 @@ class WhiteLabelComparisonSpec extends ObjectBehavior
     function it_should_send_to_the_comparison_site()
     {
         $this->setData(['test' => 'data']);
-        $this->send()->shouldBeArray();
+        $this->send()->shouldHaveType('Vultuk\Connections\Result');
     }
 
 }

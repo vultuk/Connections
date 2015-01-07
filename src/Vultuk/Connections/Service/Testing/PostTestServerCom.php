@@ -44,7 +44,7 @@
          */
         public function parse($data)
         {
-            return [$data];
+            return $this->createResult(true, [$data], null);
         }
 
     }
