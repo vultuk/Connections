@@ -6,9 +6,10 @@
     {
         protected $provider;
 
-        public function to($serviceType, $provider)
+        public static function to($serviceType, $provider)
         {
-            $this->provider = '\\Vultuk\\Connections\\Service\\'.$serviceType.'\\'.$provider;
-            return new $this->provider();
+            $thisClass = new Static();
+            $thisClass->provider = '\\Vultuk\\Connections\\Service\\'.$serviceType.'\\'.$provider;
+            return new $thisClass->provider();
         }
     }
