@@ -10,11 +10,41 @@
     {
         use isAService;
 
-        protected $hostname = "http://posttestserver.com/post.php?dir=BlahBlahBlah";
-
+        /**
+         * Returns the required connector for this service
+         *
+         * @return mixed
+         * @author Simon Skinner <s.skinner@clix.co.uk>
+         */
         public function connector()
         {
             return new CurlPost();
+        }
+
+        /**
+         * Returns an array of details required for the service
+         *
+         * @param array $details
+         * @return mixed
+         * @author Simon Skinner <s.skinner@clix.co.uk>
+         */
+        public function service()
+        {
+            return [
+                'hostname' => 'https://posttestserver.com/post.php?dir=vultuk_connections',
+            ];
+        }
+
+        /**
+         * Parses the return data to return it as an array
+         *
+         * @param $data
+         * @return mixed
+         * @author Simon Skinner <s.skinner@clix.co.uk>
+         */
+        public function parse($data)
+        {
+            return [$data];
         }
 
     }

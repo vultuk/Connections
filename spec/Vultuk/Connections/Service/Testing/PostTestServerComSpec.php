@@ -17,7 +17,7 @@ class PostTestServerComSpec extends ObjectBehavior
     function it_should_connect_to_the_testing_server()
     {
         $this->setData(['test' => 'data']);
-        $this->send()->shouldBeString();
+        $this->send()->shouldBeArray();
     }
 
 }

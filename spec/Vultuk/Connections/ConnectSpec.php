@@ -22,6 +22,6 @@ class ConnectSpec extends ObjectBehavior
         $this->to('Testing', 'PostTestServerCom')
              ->setData(['Super'=>'Test', 'Woop' => 'Working'])
              ->send()
-             ->shouldBeString();
+             ->shouldBeArray();
     }
 }
