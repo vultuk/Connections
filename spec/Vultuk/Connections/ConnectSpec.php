@@ -7,6 +7,7 @@ use Prophecy\Argument;
 
 class ConnectSpec extends ObjectBehavior
 {
+
     function it_is_initializable()
     {
         $this->shouldHaveType('Vultuk\Connections\Connect');
@@ -19,7 +20,16 @@ class ConnectSpec extends ObjectBehavior
 
     function it_should_post_data_to_test_provider()
     {
-        $this->to('Testing.PostTestServerCom')
+        $config = new \Vultuk\Connections\Facades\Config\Native();
+        $config->set([
+            'Testing' => [
+                'PostTestServerCom' => [
+                    'directory' => 'vultuk_connections_directory',
+                ]
+            ]
+        ]);
+
+        $this->to('Testing.PostTestServerCom', $config)
              ->setData(['Super'=>'Test', 'Woop' => 'Working'])
              ->send()
              ->shouldHaveType('Vultuk\Connections\Result');
