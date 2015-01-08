@@ -1,5 +1,6 @@
 {
     "name": "vultuk/connections",
+    "license": "MIT",
     "require": {
         "phpspec/phpspec": "~2.0"
     },
