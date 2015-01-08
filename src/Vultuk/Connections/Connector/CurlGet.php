@@ -5,7 +5,7 @@ namespace Vultuk\Connections\Connector;
 use Vultuk\Connections\Contracts\Connector;
 use Vultuk\Connections\Contracts\Service;
 
-class CurlPost implements Connector
+class CurlGet implements Connector
 {
 
     protected $connection;
@@ -39,15 +39,14 @@ class CurlPost implements Connector
      */
     public function send(Service $service)
     {
-        $hostname = $this->hostname;
+        $hostname = $this->hostname . "?" . $this->convertArrayToGetVariables($service->getData());
         if (!is_null($service->getExtraGetVariables()))
         {
-            $hostname .= '?' . $service->getExtraGetVariables();
+            $hostname .= '&' . $service->getExtraGetVariables();
         }
+        var_dump($hostname);
 
         curl_setopt($this->connection, CURLOPT_URL, $hostname);
-        curl_setopt($this->connection, CURLOPT_POST, count($service->getData()));
-        curl_setopt($this->connection, CURLOPT_POSTFIELDS, $service->getData());
         curl_setopt($this->connection, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($this->connection, CURLOPT_SSL_VERIFYHOST, 0);
         curl_setopt($this->connection, CURLOPT_SSL_VERIFYPEER, 0);
@@ -79,5 +78,20 @@ class CurlPost implements Connector
     public function getResult()
     {
         return $this->result;
+    }
+
+    /**
+     * @param array $data
+     * @return string
+     * @author Simon Skinner <s.skinner@clix.co.uk>
+     */
+    protected function convertArrayToGetVariables(array $data)
+    {
+        $getVarsArray = [];
+        foreach ($data as $key => $value) {
+            $getVarsArray[] = $key . '=' . $value;
+        }
+        $getVars = implode('&', $getVarsArray);
+        return $getVars;
     }
 }

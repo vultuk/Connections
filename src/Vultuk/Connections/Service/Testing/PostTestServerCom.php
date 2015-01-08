@@ -10,6 +10,8 @@
     {
         use isAService;
 
+        protected $directory;
+
         /**
          * Returns the required connector for this service
          *
@@ -31,7 +33,8 @@
         public function service()
         {
             return [
-                'hostname' => 'https://posttestserver.com/post.php?dir=vultuk_connections',
+                'hostname' => 'https://posttestserver.com/post.php',
+                'directory' => $this->config->get('Testing.PostTestServerCom.directory')
             ];
         }
 
@@ -45,6 +48,12 @@
         public function parse($data)
         {
             return $this->createResult(true, [$data], null);
+        }
+
+        public function extraSettingHandler()
+        {
+            $this->extraGETVariables = "dir=" . $this->directory;
+            return $this;
         }
 
     }

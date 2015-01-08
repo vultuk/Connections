@@ -26,6 +26,14 @@ interface Service
     public function connector();
 
     /**
+     * How we handle extra settings such as Username and Password
+     *
+     * @return mixed
+     * @author Simon Skinner <s.skinner@clix.co.uk>
+     */
+    public function extraSettingHandler();
+
+    /**
      * Returns an array of details required for the service
      *
      * @param array $details
@@ -51,4 +59,7 @@ interface Service
      */
     public function setData(array $data);
 
+    public function getData();
+
+    public function getExtraGetVariables();
 } 

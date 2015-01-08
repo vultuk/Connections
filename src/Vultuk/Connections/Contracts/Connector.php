@@ -21,7 +21,7 @@ interface Connector
      * @return mixed
      * @author Simon Skinner <s.skinner@clix.co.uk>
      */
-    public function send(array $data);
+    public function send(Service $service);
 
     /**
      * Disconnect from the service
