@@ -44,7 +44,6 @@ class CurlGet implements Connector
         {
             $hostname .= '&' . $service->getExtraGetVariables();
         }
-        var_dump($hostname);
 
         curl_setopt($this->connection, CURLOPT_URL, $hostname);
         curl_setopt($this->connection, CURLOPT_RETURNTRANSFER, true);
