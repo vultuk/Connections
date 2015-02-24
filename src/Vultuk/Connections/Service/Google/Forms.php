@@ -1,18 +1,12 @@
 <?php namespace Vultuk\Connections\Service\Google;
 
 
-use Vultuk\Connections\Connector\CurlGet;
 use Vultuk\Connections\Connector\CurlPost;
-use Vultuk\Connections\Contracts\Config;
 use Vultuk\Connections\Contracts\Service;
 use Vultuk\Connections\Service\Service as isAService;
 
 class Forms implements Service
 {
-
-    protected $connector;
-
-    protected $config;
 
     use isAService {
         send as traitSend;
@@ -50,10 +44,6 @@ class Forms implements Service
         return [
             'hostname' => $this->config->get('Google.Forms.Url'),
         ];
-    }
-
-    public function extraSettingHandler()
-    {
     }
 
     public function send()
