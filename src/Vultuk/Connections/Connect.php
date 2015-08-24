@@ -13,7 +13,7 @@
         {
             $config = (is_null($config)) ? new Native() : $config;
 
-            $thisClass = new Static();
+            $thisClass = new static();
             $thisClass->provider = '\\Vultuk\\Connections\\Service\\'.str_replace('.', '\\', $provider);
             return new $thisClass->provider($config);
         }
